@@ -38,25 +38,35 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         initHomeList()
     }
 
+    private val homeAdapter = HomeAdapter(arrayListOf())
+    private var currentPage: Int = 1
     private fun initHomeList() {
-        val homeAdapter = HomeAdapter( arrayListOf())
+        homeAdapter.setEnableLoadMore(true)
 
-        recyclerView_home.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
-        HttpClient.getClient().loadPic()
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { it: Gank -> it.results?.let { it1 -> homeAdapter.addData(it1) } },
-                        { it: Throwable -> it.printStackTrace()})
+        homeAdapter.setOnLoadMoreListener({
+            loadNetWork(currentPage)
+        }, recyclerView_home)
 
 
+        recyclerView_home.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+
+        loadNetWork(currentPage)
         recyclerView_home.adapter = homeAdapter
     }
 
-
-
-
+    private fun loadNetWork(pageNum: Int = 1) {
+        HttpClient.getClient().loadPic(10, pageNum)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ it: Gank ->
+                    it.results?.let(homeAdapter::addData)
+                    homeAdapter.loadMoreComplete()
+                    currentPage++
+                },
+                        { it: Throwable -> it.printStackTrace() })
+    }
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
