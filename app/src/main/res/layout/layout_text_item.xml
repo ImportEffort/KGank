@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/gank_type_item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="60dp"
+        android:text="一个滑动关闭Activity的组件，可以设置上下左右滑动关闭"
+        android:textColor="#FF333333"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/gank_type_item_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gank_type_item_title"
+        android:layout_marginTop="10dp"
+        android:text="111"
+        android:textColor="#FF666666"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/gank_type_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/gank_type_item_title"
+        android:layout_marginTop="10dp"
+        android:text="111"
+        android:textColor="#FF666666"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/gank_type_item_time"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorLine" />
+</RelativeLayout>

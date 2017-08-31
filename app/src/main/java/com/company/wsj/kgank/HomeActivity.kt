@@ -5,17 +5,12 @@ import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import com.company.wsj.kgank.adapter.HomeAdapter
-import com.company.wsj.kgank.entity.Gank
-import com.company.wsj.kgank.net.client.HttpClient
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.company.wsj.kgank.fragment.DayFragment
+import com.company.wsj.kgank.fragment.HomeFragment
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
-import kotlinx.android.synthetic.main.content_home.*
 
 class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -23,6 +18,8 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -35,38 +32,44 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         nav_view.setNavigationItemSelectedListener(this)
 
-        initHomeList()
+        home_radio_group.setOnCheckedChangeListener { radioGroup, id ->
+            changeFragment(id)
+        }
+        initTabFragment()
     }
 
-    private val homeAdapter = HomeAdapter(arrayListOf())
-    private var currentPage: Int = 1
-    private fun initHomeList() {
-        homeAdapter.setEnableLoadMore(true)
-
-        homeAdapter.setOnLoadMoreListener({
-            loadNetWork(currentPage)
-        }, recyclerView_home)
-
-
-        recyclerView_home.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-
-
-        loadNetWork(currentPage)
-        recyclerView_home.adapter = homeAdapter
+    private fun changeFragment(indexId: Int) {
+        val supportFragmentManager = supportFragmentManager
+        when (indexId) {
+            R.id.home_icon1 -> {
+                val instance = HomeFragment()
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragment_content, instance, "1")
+                transaction.commit()
+            }
+            R.id.home_icon2 -> {
+                val instance = DayFragment()
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragment_content, instance, "2")
+                transaction.commit()
+            }
+            R.id.home_icon3 -> {
+                val instance = DayFragment()
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragment_content, instance, "3")
+                transaction.commit()
+            }
+        }
     }
 
-    private fun loadNetWork(pageNum: Int = 1) {
-        HttpClient.getClient().loadPic(10, pageNum)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ it: Gank ->
-                    it.results?.let(homeAdapter::addData)
-                    homeAdapter.loadMoreComplete()
-                    currentPage++
-                },
-                        { it: Throwable -> it.printStackTrace() })
+    private fun initTabFragment() {
+        val supportFragmentManager = supportFragmentManager
+        val instance = HomeFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_content, instance, "1")
+        transaction.commit()
     }
+
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
