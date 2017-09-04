@@ -3,22 +3,31 @@ package com.company.wsj.kgank
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
 import com.company.wsj.kgank.fragment.DayFragment
 import com.company.wsj.kgank.fragment.HomeFragment
+import com.company.wsj.kgank.statusbar.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
+
+
+
 
 class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_home)
+
+
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+
 
 
         fab.setOnClickListener { view ->
@@ -31,12 +40,18 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+        initStatusView()
 
         home_radio_group.setOnCheckedChangeListener { radioGroup, id ->
             changeFragment(id)
         }
         initTabFragment()
     }
+
+    private fun initStatusView() {
+        StatusBarUtil.setColorNoTranslucentForDrawerLayout(this, drawer_layout, ContextCompat.getColor(this,R.color.colorTheme))
+    }
+
 
     private fun changeFragment(indexId: Int) {
         val supportFragmentManager = supportFragmentManager

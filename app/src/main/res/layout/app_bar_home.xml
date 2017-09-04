@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.company.wsj.kgank.HomeActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -21,19 +21,19 @@
 
             <RadioGroup
                 android:id="@+id/home_radio_group"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:checked="true"
                     android:id="@+id/home_icon1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/titlebar_disco"
-                    android:button="@null" />
+                    android:button="@null"
+                    android:checked="true" />
 
                 <RadioButton
                     android:id="@+id/home_icon2"
@@ -53,9 +53,10 @@
 
         </android.support.v7.widget.Toolbar>
 
-    </android.support.design.widget.AppBarLayout>
+        <include layout="@layout/content_home" />
+    </LinearLayout>
 
-    <include layout="@layout/content_home" />
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -65,4 +66,4 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
-</android.support.design.widget.CoordinatorLayout>
+</FrameLayout>

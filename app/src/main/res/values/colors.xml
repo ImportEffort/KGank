@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#d23023</color>
+    <color name="colorPrimaryDark">#d23023</color>
+    <color name="colorAccent">#d23023</color>
 
 
-    <color name="colorTheme">#ffce3d3a</color>
+    <color name="colorTheme">#d23023</color>
     <!--页面背景的颜色-->
     <color name="colorPageBg">#f2f4f5</color>
 
@@ -68,4 +68,5 @@
     <color name="text_deed_bg">#f6f6f6</color>
     <!--dialog的查看详情键-->
     <color name="colorBtDialog">#38659C</color>
+    <color name="black">#000000</color>
 </resources>

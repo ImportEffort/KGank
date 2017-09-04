@@ -5,14 +5,15 @@ import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.company.wsj.kgank.R
+import com.company.wsj.kgank.TEXT
+import com.company.wsj.kgank.TEXT_IMAGE
 import com.company.wsj.kgank.entity.GankTypeData
 
 /**
  * Created by wangshijia on 2017/8/30.
  *
  */
-const val TEXT: Int = 0
-const val TEXT_IMAGE: Int = 1
+
 
 class AndroidAdapter(data: MutableList<GankTypeData>) : BaseMultiItemQuickAdapter<GankTypeData, BaseViewHolder>(data) {
 

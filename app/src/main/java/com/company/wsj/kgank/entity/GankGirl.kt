@@ -7,7 +7,7 @@ import com.chad.library.adapter.base.entity.MultiItemEntity
  *
  */
 
-data class ResponseWrapper<T>(val error: Boolean, val results: List<T>)
+data class ResponseWrapper<out T>(val error: Boolean, val results: List<T>)
 
 data class GankGirl(val _id: String? = "",
                     val createdAt: String? = "",
@@ -19,7 +19,6 @@ data class GankGirl(val _id: String? = "",
                     val used: Boolean = false,
                     val who: String? = "")
 
-data class Gank(var error: Boolean = false, var results: List<GankGirl>? = null)
 
 data class GankTypeData(var _id: String,
                         var createdAt: String,

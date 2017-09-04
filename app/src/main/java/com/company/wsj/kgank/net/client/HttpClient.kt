@@ -26,7 +26,7 @@ object HttpClient {
     fun getClient(): ApiStores {
         val builder: OkHttpClient.Builder = OkHttpClient.Builder()
         //设置 OKHttp 缓存
-        setCacheConfig(builder)
+//        setCacheConfig(builder)
         //https 设置
         setHttpsConfig(builder)
         //设置超时和重连
